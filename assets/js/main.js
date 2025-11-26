@@ -1,4 +1,4 @@
-console.log("Iniciando sistema modular v6.0 (Search & Files)...");
+console.log("Iniciando sistema modular v6.1 (Fix Dark Mode)...");
 
 /* =============================================================
     1. DATOS (Base de Datos Simulada)
@@ -55,7 +55,7 @@ function renderNavbar(activePage) {
             </a>
             
             <div class="position-absolute top-50 start-50 translate-middle d-none d-lg-block">
-                <span class="fw-bold fs-5 text-dark">Secretaría Académica</span>
+                <span class="fw-bold fs-5 text-dark">SECRETARIA ACADEMICA</span>
             </div>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
@@ -172,7 +172,6 @@ function renderServices(filter = "") {
 
     // D. Renderizar Documentos (Si hay búsqueda activa y resultados)
     if (term !== "" && matchingDocs.length > 0) {
-        // Separador Visual
         grid.innerHTML += `
             <div class="col-12 mt-4 mb-2 fade-in">
                 <h5 class="text-muted border-bottom pb-2"><i class="bi bi-file-earmark-pdf me-2"></i>Documentos y Archivos Relacionados</h5>
@@ -199,7 +198,6 @@ function renderServices(filter = "") {
         });
     }
 
-    // E. Mensaje "Sin Resultados"
     if(matchingServices.length === 0 && matchingDocs.length === 0) {
         grid.innerHTML = `<div class="col-12 text-center text-muted py-5">
             <i class="bi bi-search display-4 d-block mb-3"></i>
@@ -233,7 +231,6 @@ function renderNews() {
 /* =============================================================
     4. FUNCIONALIDAD TABLAS (Buscador Personal Docente)
    ============================================================= */
-// Esta función ahora vive en main.js y se puede llamar desde cualquier página
 function initSearchTable(inputId, tableId) {
     const input = document.getElementById(inputId);
     const table = document.getElementById(tableId);
@@ -242,16 +239,12 @@ function initSearchTable(inputId, tableId) {
 
     input.addEventListener('keyup', function() {
         const filter = input.value.toLowerCase();
-        // Buscar filas dentro de tbody para evitar ocultar el encabezado
         const tbody = table.querySelector('tbody');
         const rows = tbody ? tbody.getElementsByTagName('tr') : table.getElementsByTagName('tr');
 
         for (let i = 0; i < rows.length; i++) {
-            // Si no hay tbody, saltamos la primera fila asumiendo que es header
             if (!tbody && i === 0) continue;
-
             const text = rows[i].textContent.toLowerCase();
-            // Mostrar si coincide, ocultar si no
             rows[i].style.display = text.includes(filter) ? '' : 'none';
         }
     });
@@ -270,19 +263,54 @@ function initPage(activeNavOption = "", breadcrumbData = null) {
         renderBreadcrumb(activeNavOption);
     }
 
-    renderServices(); // Carga inicial de servicios
+    renderServices(); 
     renderNews();
 
     const savedTheme = localStorage.getItem('theme') || 'light';
     document.documentElement.setAttribute('data-bs-theme', savedTheme);
 }
 
+/* =============================================================
+    6. LISTENERS GLOBALES (Fix v6.1: Se restaura el Theme Toggle)
+   ============================================================= */
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Buscador Global (Página de Inicio)
+    
+    // A. Buscador Global (Página de Inicio)
     const searchInput = document.getElementById('search-input');
     if(searchInput) {
         searchInput.addEventListener('input', (e) => { 
             renderServices(e.target.value); 
+        });
+    }
+
+    // B. Toggle Tema (RESTAURADO)
+    const btnTheme = document.getElementById('theme-toggle');
+    if(btnTheme) {
+        btnTheme.addEventListener('click', () => {
+            const html = document.documentElement;
+            const current = html.getAttribute('data-bs-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            
+            html.setAttribute('data-bs-theme', next);
+            localStorage.setItem('theme', next);
+            
+            // Actualizar texto/icono del botón si es necesario
+            if(next === 'dark') {
+                btnTheme.innerHTML = '<i class="bi bi-sun-fill"></i> Modo Claro';
+                // Opcional: ajustar estilos del panel de control
+                const panel = document.getElementById('controls-panel');
+                if(panel) {
+                    panel.classList.remove('bg-white');
+                    panel.classList.add('bg-dark', 'border-secondary');
+                }
+            } else {
+                btnTheme.innerHTML = '<i class="bi bi-moon-stars-fill"></i> Modo Oscuro';
+                const panel = document.getElementById('controls-panel');
+                if(panel) {
+                    panel.classList.add('bg-white');
+                    panel.classList.remove('bg-dark', 'border-secondary');
+                }
+            }
         });
     }
 });
