@@ -54,9 +54,7 @@ function renderNavbar(activePage) {
                 <img src="assets/images/logo-fcc.png" alt="Logo FCC" style="height: 40px;"> 
             </a>
             
-            <div class="position-absolute top-50 start-50 translate-middle d-none d-lg-block">
-                <span class="fw-bold fs-5 text-dark">SECRETARIA ACADEMICA</span>
-            </div>
+            
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
                 <span class="navbar-toggler-icon"></span>
