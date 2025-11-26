@@ -4,7 +4,7 @@ console.log("Iniciando sistema modular v4.0 (Fixed)...");
     1. DATOS (Simulación de Base de Datos)
    ============================================================= */
 const dataServices = [
-    { title: "Estudiantes", desc: "Trámites, horarios, guías y servicios académicos.", link: "estudiantes.html" },
+    { title: "Estudiantes", desc: "Plan de estudios, Asesorías y Servicios académicos.", link: "estudiantes.html" },
     { title: "Docentes", desc: "Recursos, formatos administrativos y apoyo a la docencia.", link: "docentes.html" },
     { title: "Guías y Recursos", desc: "Manuales de Moodle, Teams, correo y bibliotecas.", link: "guias.html" }
 ];
@@ -33,22 +33,28 @@ function renderNavbar(activePage) {
 
     navContainer.innerHTML = `
     <nav class="navbar navbar-expand-lg shadow-sm sticky-top navbar-custom">
-        <div class="container">
+        <div class="container position-relative">
+            
             <a class="navbar-brand" href="index.html">
                 <img src="assets/images/logo-fcc.png" alt="Logo FCC" style="height: 40px;"> 
-                <span class="ms-2 d-none d-md-inline fw-bold text-secondary">Secretaría Académica</span>
             </a>
+
+            <div class="position-absolute top-50 start-50 translate-middle d-none d-lg-block">
+                <span class="fw-bold fs-5 text-dark">SECRETARIA ACADEMICA</span>
+            </div>
+
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
             <div class="collapse navbar-collapse" id="mainNav">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <li class="nav-item"><a class="nav-link ${getClass('Inicio')}" href="index.html">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link ${getClass('Guías')}" href="guias.html">Guías</a></li>
                     <li class="nav-item"><a class="nav-link ${getClass('Estudiantes')}" href="estudiantes.html">Estudiantes</a></li>
                     <li class="nav-item"><a class="nav-link ${getClass('Docentes')}" href="docentes.html">Docentes</a></li>
                     <li class="nav-item"><a class="nav-link ${getClass('Directorio')}" href="directorio.html">Directorio</a></li>
-                    <li class="nav-item"><a class="nav-link ${getClass('Contacto')}" href="contacto.html">Contacto</a></li>
-                    <li class="nav-item"><a class="nav-link ${getClass('Guías')}" href="guias.html">Guías</a></li>
+                    <li class="nav-item"><a class="nav-link ${getClass('Contacto')}" href="contacto.html">Contacto</a></li>                    
                 </ul>
             </div>
         </div>
