@@ -1,7 +1,7 @@
-console.log("Iniciando sistema modular v3.0...");
+console.log("Iniciando sistema modular v4.0 (Fixed)...");
 
 /* =============================================================
-    1. DATOS (Simulación de Base de Datos - ESCALABILIDAD)
+    1. DATOS (Simulación de Base de Datos)
    ============================================================= */
 const dataServices = [
     { title: "Estudiantes", desc: "Trámites, horarios, guías y servicios académicos.", link: "estudiantes.html" },
@@ -16,17 +16,14 @@ const dataNews = [
 ];
 
 /* =============================================================
-    2. COMPONENTES DE INTERFAZ (UI)
+    2. COMPONENTES UI (Nav, Footer, Breadcrumbs)
    ============================================================= */
 
-// Renderiza el Menú de Navegación (Unificado)
-// Renderiza el Menú de Navegación (Con estado Activo)
 function renderNavbar(activePage) {
     const navContainer = document.getElementById('navbar-container');
     if(!navContainer) return; 
 
-    // Función auxiliar para saber si poner la clase 'active'
-    // Si activePage está vacío, asumimos que es 'Inicio'
+    // Función para marcar activo el menú superior
     const getClass = (pageName) => {
         if ((pageName === 'Inicio' && !activePage) || pageName === activePage) {
             return 'active';
@@ -58,13 +55,12 @@ function renderNavbar(activePage) {
     </nav>`;
 }
 
-
 function renderFooter() {
     const footerContainer = document.getElementById('footer-container');
     if(!footerContainer) return;
     
     footerContainer.innerHTML = `
-    <footer class="bg-dark text-white pt-5 pb-2 shadow-lg" style="border-radius: 20px 20px 0 0;"> 
+    <footer class="bg-dark text-white pt-5 pb-2 shadow-lg" style="border-radius: 20px 20px 0 0; margin-top: auto;"> 
         <div class="container text-center text-md-start">
             <div class="row">
                 <div class="col-md-4 col-lg-4 mx-auto mt-3">
@@ -81,42 +77,59 @@ function renderFooter() {
                     <p><a href="#" class="text-white text-decoration-none link-hover">Aviso de Privacidad</a></p>
                 </div>
             </div>
-            
-            <hr class="mb-4" style="opacity: 0.2;"> <div class="text-center p-3">
+            <hr class="mb-4" style="opacity: 0.2;"> 
+            <div class="text-center p-3">
                 © 2025 Benemérita Universidad Autónoma de Puebla
             </div>
         </div>
     </footer>`;
 }
 
-// Renderiza las Migas de Pan (Tree) - USABILIDAD
-function renderBreadcrumb(currentPageName) {
+// === LÓGICA DE BREADCRUMBS CORREGIDA ===
+// Acepta un arreglo de objetos: [{label: 'Nombre', link: 'url.html'}, {label: 'Actual', active: true}]
+// O un string simple: "NombrePagina"
+function renderBreadcrumb(pathData) {
     const container = document.getElementById('breadcrumb-container');
-    if(container && currentPageName) {
-        container.innerHTML = `
-        <nav aria-label="breadcrumb" class="my-4 fade-in">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html" class="text-decoration-none">Inicio</a></li>
-                <li class="breadcrumb-item active" aria-current="page">${currentPageName}</li>
-            </ol>
-        </nav>`;
+    if(!container) return;
+
+    // 1. Siempre iniciamos con "Inicio"
+    let itemsHtml = `<li class="breadcrumb-item"><a href="index.html" class="text-decoration-none">Inicio</a></li>`;
+
+    // 2. Si recibimos un ARREGLO (Ruta multinivel)
+    if (Array.isArray(pathData)) {
+        pathData.forEach(item => {
+            if (item.active || !item.link) {
+                // Es el elemento actual (sin enlace)
+                itemsHtml += `<li class="breadcrumb-item active" aria-current="page">${item.label}</li>`;
+            } else {
+                // Es un paso intermedio (con enlace)
+                itemsHtml += `<li class="breadcrumb-item"><a href="${item.link}" class="text-decoration-none">${item.label}</a></li>`;
+            }
+        });
+    } 
+    // 3. Si recibimos un STRING (Nivel simple)
+    else if (typeof pathData === 'string' && pathData !== "") {
+        itemsHtml += `<li class="breadcrumb-item active" aria-current="page">${pathData}</li>`;
     }
+
+    // 4. Inyectar HTML
+    container.innerHTML = `
+    <nav aria-label="breadcrumb" class="my-4 fade-in">
+        <ol class="breadcrumb">
+            ${itemsHtml}
+        </ol>
+    </nav>`;
 }
 
 /* =============================================================
-    3. RENDERIZADO DE CONTENIDO (Inicio)
+    3. RENDERIZADO DE CONTENIDO (Servicios y Noticias)
    ============================================================= */
-
 function renderServices(filter = "") {
     const grid = document.getElementById('services-grid');
     if(!grid) return;
 
     grid.innerHTML = ""; 
-    
-    const filtered = dataServices.filter(s => 
-        s.title.toLowerCase().includes(filter) || 
-        s.desc.toLowerCase().includes(filter)
-    );
+    const filtered = dataServices.filter(s => s.title.toLowerCase().includes(filter) || s.desc.toLowerCase().includes(filter));
     
     if(filtered.length === 0) {
         grid.innerHTML = `<div class="col-12 text-center text-muted py-5">No hay resultados para "${filter}"</div>`;
@@ -141,7 +154,6 @@ function renderServices(filter = "") {
 function renderNews() {
     const indicators = document.getElementById('carousel-indicators');
     const inner = document.getElementById('carousel-inner');
-    
     if(!indicators || !inner) return;
 
     indicators.innerHTML = "";
@@ -150,7 +162,6 @@ function renderNews() {
     dataNews.forEach((news, idx) => {
         const active = idx === 0 ? 'active' : '';
         indicators.innerHTML += `<button type="button" data-bs-target="#newsCarousel" data-bs-slide-to="${idx}" class="${active}"></button>`;
-        
         inner.innerHTML += `
         <div class="carousel-item ${active}">
             <img src="${news.img}" class="d-block w-100" alt="${news.title}" onerror="this.src='https://via.placeholder.com/800x400?text=Imagen+No+Disponible'">
@@ -165,36 +176,42 @@ function renderNews() {
 /* =============================================================
         4. INICIALIZADOR MAESTRO
    ============================================================= */
-
-function initPage(pageName = "") {
-    // AHORA PASAMOS pageName AQUÍ:
-    renderNavbar(pageName); 
+// activeNavOption: El nombre del item en el Navbar que debe estar resaltado (ej: "Estudiantes")
+// breadcrumbData: (Opcional) El string o array para las migas de pan. Si no se pasa, usa activeNavOption.
+function initPage(activeNavOption = "", breadcrumbData = null) {
     
+    // 1. Renderizar Nav y Footer
+    renderNavbar(activeNavOption); 
     renderFooter();
     
-    if(pageName !== "") {
-        renderBreadcrumb(pageName);
+    // 2. Renderizar Breadcrumbs
+    // Si pasamos datos específicos para el breadcrumb, úsalos. Si no, usa el nombre del Nav.
+    if(breadcrumbData) {
+        renderBreadcrumb(breadcrumbData);
+    } else {
+        renderBreadcrumb(activeNavOption);
     }
 
+    // 3. Renderizar componentes de la página de inicio (si existen)
     renderServices();
     renderNews();
 
+    // 4. Tema Oscuro/Claro
     const savedTheme = localStorage.getItem('theme') || 'light';
     document.documentElement.setAttribute('data-bs-theme', savedTheme);
 }
 
 /* =============================================================
-    5. LISTENERS (Buscador y Tema)
+    5. LISTENERS
    ============================================================= */
 document.addEventListener('DOMContentLoaded', () => {
-    
+    // Buscador
     const searchInput = document.getElementById('search-input');
     if(searchInput) {
-        searchInput.addEventListener('input', (e) => {
-            renderServices(e.target.value.toLowerCase());
-        });
+        searchInput.addEventListener('input', (e) => { renderServices(e.target.value.toLowerCase()); });
     }
 
+    // Toggle Tema
     const btnTheme = document.getElementById('theme-toggle');
     if(btnTheme) {
         btnTheme.addEventListener('click', () => {
@@ -205,6 +222,7 @@ document.addEventListener('DOMContentLoaded', () => {
             html.setAttribute('data-bs-theme', next);
             localStorage.setItem('theme', next);
             
+            // Actualizar botón si existe en el panel de control
             const panel = document.getElementById('controls-panel');
             if(panel) {
                 if(next === 'dark') {

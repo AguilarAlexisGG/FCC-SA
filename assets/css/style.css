@@ -265,3 +265,111 @@ body {
     background-color: rgba(255, 255, 255, 0.555);
     color: #ffffff !important;
 }
+
+/* ... (Mantén todo tu CSS anterior hasta donde termina) ... */
+
+/* =======================================================
+    6. COMPONENTES ACADÉMICOS (Acordeones y Listas)
+   ======================================================= */
+
+/* --- Iconos de Carrera --- */
+.career-icon { font-size: 3rem; margin-bottom: 1rem; }
+.icon-blue { color: #09b5e2; }
+.icon-orange { color: #fd7e14; }
+.icon-green { color: #84cc16; }
+
+/* --- Acordeones Personalizados --- */
+.accordion-button {
+    font-weight: 600;
+    color: #34495e;
+    background-color: #f8f9fa; /* Gris muy suave */
+    border: 1px solid #dee2e6;
+    transition: all 0.3s ease;
+}
+
+/* Estado Activo (Abierto) */
+.accordion-button:not(.collapsed) {
+    background-color: #09b5e2; /* Azul Institucional */
+    color: white;
+    box-shadow: 0 4px 6px rgba(9, 181, 226, 0.2);
+    border-color: #09b5e2;
+}
+
+/* Quitar foco azul default de Bootstrap */
+.accordion-button:focus {
+    box-shadow: none;
+    border-color: rgba(0,0,0,.125);
+}
+
+.accordion-button::after {
+    transition: transform 0.3s ease;
+}
+
+/* Cuando está activo, cambiar la flecha a blanco */
+.accordion-button:not(.collapsed)::after {
+    filter: brightness(0) invert(1); 
+}
+
+/* --- Listas de Enlaces (Dentro del acordeón) --- */
+.list-group-item {
+    border: none;
+    border-left: 4px solid transparent;
+    padding: 0.8rem 1.2rem;
+    transition: all 0.2s ease;
+}
+
+.list-group-item:hover {
+    background-color: #f0f9ff; /* Azul muy pálido */
+    border-left-color: #09b5e2;
+    padding-left: 1.5rem; /* Pequeño desplazamiento a la derecha */
+}
+
+.list-group-item a {
+    text-decoration: none;
+    color: #495057;
+    display: block;
+    width: 100%;
+    font-weight: 500;
+}
+
+.list-group-item:hover a {
+    color: #09b5e2;
+}
+
+/* =======================================================
+    7. MODO OSCURO (Override para nuevos componentes)
+   ======================================================= */
+[data-bs-theme="dark"] .accordion-button {
+    background-color: #2b3035;
+    color: #e0e0e0;
+    border-color: #495057;
+}
+
+[data-bs-theme="dark"] .accordion-button:not(.collapsed) {
+    background-color: #09b5e2;
+    color: white;
+    border-color: #09b5e2;
+}
+
+[data-bs-theme="dark"] .accordion-body {
+    background-color: #212529; /* Fondo oscuro para el contenido desplegado */
+    color: #e0e0e0;
+}
+
+[data-bs-theme="dark"] .list-group-item {
+    background-color: transparent;
+    color: #adb5bd;
+}
+
+[data-bs-theme="dark"] .list-group-item:hover {
+    background-color: #343a40;
+    color: #fff;
+}
+
+[data-bs-theme="dark"] .list-group-item a {
+    color: #adb5bd;
+}
+
+[data-bs-theme="dark"] .list-group-item:hover a {
+    color: #fff;
+}

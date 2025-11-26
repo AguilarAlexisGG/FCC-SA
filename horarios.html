@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FCC - Horarios</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="assets/css/style.css" rel="stylesheet">
+</head>
+<body class="bg-body-tertiary">
+
+    <div id="navbar-container"></div>
+
+    <div class="container my-5">
+        <div id="breadcrumb-container"></div>
+        
+        <div class="text-center mb-5 fade-in">
+            <h1 class="display-4 fw-bold text-dark">Horarios de Materias</h1>
+            <p class="lead text-muted">Consulta la programación académica vigente.</p>
+        </div>
+
+        <div class="row justify-content-center fade-in">
+            
+            <div class="col-lg-5 mb-4">
+                <div class="card card-blade h-100 border-0 shadow-sm">
+                    <div class="card-body p-5 text-center">
+                        <i class="bi bi-flower1 display-1 text-warning mb-3"></i>
+                        <h2 class="card-title h3 fw-bold mb-3">Periodo Primavera</h2>
+                        <p class="text-muted mb-4">Enero - Mayo</p>
+
+                        <div class="accordion" id="accPrimavera">
+                            <div class="accordion-item border-0">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed rounded" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePrim">
+                                        <i class="bi bi-calendar-range me-2"></i> Ver Horarios
+                                    </button>
+                                </h2>
+                                <div id="collapsePrim" class="accordion-collapse collapse" data-bs-parent="#accPrimavera">
+                                    <div class="accordion-body p-0 mt-2 rounded overflow-hidden">
+                                        <div class="list-group list-group-flush text-start">
+                                            <a href="#" class="list-group-item">Horario Licenciatura</a>
+                                            <a href="#" class="list-group-item">Horario Ingenierías</a>
+                                            <a href="#" class="list-group-item">Materias Optativas</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-5 mb-4">
+                <div class="card card-blade h-100 border-0 shadow-sm">
+                    <div class="card-body p-5 text-center">
+                        <i class="bi bi-snow2 display-1 text-info mb-3"></i>
+                        <h2 class="card-title h3 fw-bold mb-3">Periodo Otoño</h2>
+                        <p class="text-muted mb-4">Agosto - Diciembre</p>
+
+                        <div class="accordion" id="accOtono">
+                            <div class="accordion-item border-0">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed rounded" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOto">
+                                        <i class="bi bi-calendar-range me-2"></i> Ver Horarios
+                                    </button>
+                                </h2>
+                                <div id="collapseOto" class="accordion-collapse collapse" data-bs-parent="#accOtono">
+                                    <div class="accordion-body p-0 mt-2 rounded overflow-hidden">
+                                        <div class="list-group list-group-flush text-start">
+                                            <a href="#" class="list-group-item">Horario Licenciatura</a>
+                                            <a href="#" class="list-group-item">Horario Ingenierías</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="footer-container"></div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/main.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            initPage('Estudiantes', [
+                { label: 'Estudiantes', link: 'estudiantes.html' },
+                { label: 'Horarios Materias', active: true }
+            ]);
+        });
+    </script>
+</body>
+</html>
