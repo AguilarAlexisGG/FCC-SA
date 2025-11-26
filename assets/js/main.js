@@ -70,17 +70,17 @@ function renderFooter() {
         <div class="container text-center text-md-start">
             <div class="row">
                 <div class="col-md-4 col-lg-4 mx-auto mt-3">
-                    <h5 class="text-uppercase mb-4 fw-bold text-primary">FCC BUAP</h5>
+                    <h5 class="text-uppercase mb-4 fw-bold text-secondary">FCC BUAP</h5>
                     <p>Ciudad Universitaria, Puebla.</p>
                 </div>
                 <div class="col-md-4 col-lg-3 mx-auto mt-3">
-                    <h5 class="text-uppercase mb-4 fw-bold">Enlaces Rápidos</h5>
-                    <p><a href="#" class="text-white text-decoration-none link-hover">Autoservicios</a></p>
-                    <p><a href="#" class="text-white text-decoration-none link-hover">Correo Institucional</a></p>
+                    <h5 class="text-uppercase mb-4 fw-bold text-secondary">Enlaces Rápidos</h5>
+                    <p><a href="#" class="text-white text-primary link-hover">Autoservicios</a></p>
+                    <p><a href="#" class="text-white text-primary link-hover">Correo Institucional</a></p>
                 </div>
                 <div class="col-md-4 col-lg-3 mx-auto mt-3">
-                    <h5 class="text-uppercase mb-4 fw-bold">Legal</h5>
-                    <p><a href="#" class="text-white text-decoration-none link-hover">Aviso de Privacidad</a></p>
+                    <h5 class="text-uppercase mb-4 fw-bold text-secondary">Legal</h5>
+                    <p><a href="#" class="text-white text-primary link-hover">Aviso de Privacidad</a></p>
                 </div>
             </div>
             <hr class="mb-4" style="opacity: 0.2;"> 

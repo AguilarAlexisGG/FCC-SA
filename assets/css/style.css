@@ -216,8 +216,8 @@ body {
     background-image: url('../images/bg-guias-1.jpg');
     background-color: #2980b9;
 }
-.bg-guias-biblio {
-    background-image: url('../images/bg-guias-2.jpg');
+.bg-guias-correo {
+    background-image: url('../images/bg-guias-3.webp');
     background-color: #16a085;
 }
 
@@ -372,4 +372,21 @@ body {
 
 [data-bs-theme="dark"] .list-group-item:hover a {
     color: #fff;
+}
+
+/* =======================================================
+    8. ICONOS DE PERIODO (Horarios)
+   ======================================================= */
+.period-icon {
+    width: 120px;          /* Ajusta este valor según el tamaño deseado */
+    height: 120px;         /* Mantiene el área cuadrada */
+    object-fit: contain;   /* Evita que la imagen se deforme */
+    display: block;        /* Permite usar márgenes automáticos */
+    margin: 0 auto 1.5rem; /* Centrado horizontal (auto) y separación inferior */
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1)); /* Sombra suave para la imagen */
+    transition: transform 0.3s ease;
+}
+
+.period-icon:hover {
+    transform: scale(1.05); /* Efecto sutil de zoom al pasar el mouse */
 }
