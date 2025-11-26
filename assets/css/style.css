@@ -1,0 +1,267 @@
+/* ==================== ESTILOS GENERALES ==================== */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    background-color: #f8f9fa;
+    
+    /* CORRECCIÓN DE LAYOUT (Sticky Footer) */
+    /* Esto obliga al footer a irse al final sin chocar */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Agrega esto para asegurar que el contenido empuje el footer */
+#footer-container {
+    margin-top: auto; /* La magia: empuja el footer al fondo */
+    width: 100%;      /* Asegura que cubra todo el ancho */
+    z-index: 100;     /* Asegura que esté por encima de elementos flotantes */
+    position: relative;
+}
+
+/* ==================== TARJETAS (CARD-BLADE) ==================== */
+.card-blade {
+    border: none;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    background-color: #fff;
+}
+
+.card-blade:hover {
+    transform: scale(1.05);
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, 0.15)!important;
+    z-index: 10;
+}
+
+/* ==================== MODO OSCURO (ACCESIBILIDAD) ==================== */
+[data-bs-theme="dark"] body {
+    background-color: #212529 !important;
+    color: #f8f9fa;
+}
+
+[data-bs-theme="dark"] .card-blade {
+    background-color: #343a40;
+    color: #e0e0e0;
+}
+
+[data-bs-theme="dark"] .text-muted {
+    color: #adb5bd !important;
+}
+
+[data-bs-theme="dark"] .card {
+    background-color: #343a40; /* Para tarjetas que no son blade */
+    color: #e0e0e0;
+}
+
+[data-bs-theme="dark"] .bg-light {
+    background-color: #2b3035 !important; /* Ajuste para fondos claros en modo oscuro */
+}
+
+/* ==================== ANIMACIONES Y AJUSTES ==================== */
+.fade-in { 
+    animation: fadeIn 0.5s ease-in; 
+}
+
+@keyframes fadeIn { 
+    from { opacity: 0; transform: translateY(10px); } 
+    to { opacity: 1; transform: translateY(0); } 
+}
+
+/* Ajuste para imágenes del carrusel para que no salten */
+.carousel-item img {
+    object-fit: cover;
+    height: 400px; 
+}
+
+
+.navbar-custom {
+    background-color: rgb(9, 181, 226);
+    color: rgb(18, 46, 72);
+}
+.navbar-custom .nav-link, 
+.navbar-custom .navbar-brand {
+    color: rgb(18, 46, 72);
+}
+
+/* Cuando está en Modo Oscuro */
+[data-bs-theme="dark"] .navbar-custom {
+    background-color: rgb(18, 46, 72) !important; /* Fondo */
+    border-bottom: 1px solid #444;
+}
+
+[data-bs-theme="dark"] .navbar-custom .nav-link,
+[data-bs-theme="dark"] .navbar-custom .navbar-brand,
+[data-bs-theme="dark"] .navbar-toggler-icon {
+    color: #f8f9fa !important;
+    filter: invert(1);
+}
+
+[data-bs-theme="dark"] .card {
+    background-color: #343a40;
+    color: white;
+}
+
+.fb-container {
+    background-color: #f0f2f5; 
+    overflow: hidden; 
+    border-radius: 0 0 15px 15px;
+}
+
+
+[data-bs-theme="dark"] #theme-toggle {
+    color: #fff !important;
+    border-color: #fff !important;
+}
+
+[data-bs-theme="dark"] #theme-toggle:hover {
+    background-color: #fff !important;
+    color: #000 !important;
+}
+
+
+/* =======================================================
+        SECCIONES DE PANTALLA COMPLETA (ESTUDIANTES)
+   ======================================================= */
+
+.scroll-container {
+    height: 100vh;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+}
+
+.hero-section {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    position: relative;
+    
+    /* Configuración de fondo */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed; 
+    
+    scroll-snap-align: start;
+}
+
+.hero-overlay {
+    background-color: rgba(0, 0, 0, 0.6); 
+    padding: 3rem;
+    border-radius: 15px;
+    backdrop-filter: blur(5px); 
+    border: 1px solid rgba(255,255,255,0.2);
+    max-width: 800px;
+    margin: 0 20px;
+}
+
+/* IMÁGENES DE FONDO ESPECÍFICAS */
+
+/* 1. Trámites */
+.bg-tramites {
+    background-image: url('../images/bg-tramites.jpg'); 
+}
+
+/* 2. Horarios */
+.bg-horarios {
+    background-image: url('../images/bg-horarios.jpg');
+
+}
+
+/* 3. Servicios */
+.bg-servicios {
+    background-image: url('../images/bg-servicios.jpeg');
+}
+
+.btn-blade {
+    border: none;
+    border-radius: 12px;
+    padding: 15px 30px;
+    font-weight: 600; 
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.btn-blade:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+    z-index: 5;
+}
+
+.btn-blade-primary { background-color: rgb(9, 181, 226); color: white; }
+.btn-blade-info { background-color: rgb(9, 181, 226); color: #000; }
+.btn-blade-danger { background-color: rgb(9, 181, 226); color: white; }
+.btn-blade-light { background-color: #f8f9fa; color: #000; }
+
+/* =======================================================
+            FONDOS PARA LAS NUEVAS PÁGINAS
+   ======================================================= */
+
+/* --- DOCENTES --- */
+.bg-docentes-recursos {
+    background-image: url('../images/bg-docentes-1.jpg');
+    /*background-color: #2c3e50;*/
+}
+.bg-docentes-gestion {
+    background-image: url('../images/bg-docentes-2.png'); 
+    /*background-color: #e67e22;*/
+}
+
+
+/* --- GUÍAS --- */
+.bg-guias-plat {
+    background-image: url('../images/bg-guias-1.jpg');
+    background-color: #2980b9;
+}
+.bg-guias-biblio {
+    background-image: url('../images/bg-guias-2.jpg');
+    background-color: #16a085;
+}
+
+/* --- CONTACTO --- */
+.bg-contacto-soporte {
+    background-image: url('../images/bg-tech.jpg');
+    background-color: #34495e;
+}
+.bg-contacto-titu {
+    background-image: url('../images/bg-grad.webp');
+    background-color: #8e44ad;
+}
+.bg-contacto-social {
+    background-image: url('../images/bg-comunidad.jpeg');
+    background-color: #d35400;
+}
+
+/* --- DIRECTORIO --- */
+.bg-directorio-main {
+    background-image: url('../images/bg-direct.jpg');
+    background-color: #7f8c8d;
+}
+
+/* ==================== FOOTER LINKS HOVER ==================== */
+.link-hover {
+    transition: color 0.3s ease, text-decoration 0.3s ease; /* Suaviza el cambio */
+}
+
+.link-hover:hover {
+    color: #0dcaf0 !important; /* Cambia a color cian (o el que prefieras) */
+    text-decoration: underline !important; /* Agrega subrayado */
+    opacity: 0.8; /* Opcional: reduce ligeramente la opacidad */
+}
+
+/* ==================== NAVBAR LINK ACTIVO ==================== */
+.navbar-custom .nav-link.active {
+    background-color: rgb(255, 255, 255); /* Fondo blanco semitransparente */
+    font-weight: 700;       /* Texto en negrita */
+    border-radius: 8px;     /* Bordes redondeados */
+    color: rgb(18, 46, 72) !important; /* Mantiene el color del texto oscuro */
+}
+
+/* Ajuste para Modo Oscuro */
+[data-bs-theme="dark"] .navbar-custom .nav-link.active {
+    background-color: rgba(255, 255, 255, 0.555);
+    color: #ffffff !important;
+}
